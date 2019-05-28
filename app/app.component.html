@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div *ngFor="let message of messages; let i = index">
+        <div [ngSwitch]="message.type">
+          <div class="d-block p-2 bg-primary m-2" *ngSwitchCase="0">
+            {{message.label}}
+          </div>
+          <div class="d-block p-2 bg-primary m-2" *ngSwitchCase="1">
+            <div class="card">
+              <img src="{{message.imageUrl}}" class="card-img-top" alt="{{message.title}}">
+              <div class="card-body">
+                <h5 class="card-title">{{message.title}}</h5>
+                <p class="card-text">{{message.subtitle}}</p>
+                <div *ngFor="let button of message.buttons">
+                  <a href="{{button.postback}}" target="_blank" class="btn btn-primary">{{button.text}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-block p-2 bg-primary m-2" *ngSwitchCase="2">
+            <span *ngFor="let replie of message.replies">
+              <button class="btn btn-secondary m-2">
+                {{replie}}
+              </button>
+            </span>
+          </div>
+          <div class="d-block p-2 bg-primary m-2" *ngSwitchCase="3">
+            <img src="{{message.imageUrl}}" width="100%" />
+          </div>
+          <div class="d-block p-2 bg-primary m-2" *ngSwitchDefault>
+            {{ message | json }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
